@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 
-MAINTAINER Rabenda <rabenda.cn@gmail.com>
+LABEL maintainer="Rabenda <rabenda.cn@gmail.com>" 
 
-LABEL version="1.0"
+LABEL version="1.1"
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt update -qq && \
@@ -18,7 +18,7 @@ ENV LC_ALL en_US.UTF-8
 # Install dependencies
 RUN apt install -y -qq ca-certificates
 RUN update-ca-certificates
-RUN apt install -y -qq --no-install-recommends uuid-runtime wget sudo build-essential \
+RUN apt install -y --no-install-recommends uuid-runtime wget sudo build-essential \
     asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev \
     patch python3.5 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion \
     flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev \
@@ -42,7 +42,7 @@ ADD config/.config .config
 
 # Download dependencies
 
-RUN make download
+# RUN make download
 
 # compile
 RUN make -j $(expr $(nproc) + 1)
